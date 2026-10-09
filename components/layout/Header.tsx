@@ -139,8 +139,8 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-stretch gap-3">
-            <div className="flex items-center lg:ml-4 lg:border-l lg:border-current/25 lg:pl-5">
+          <div className="flex items-stretch gap-2 lg:gap-3">
+            <div className="flex items-center max-[22.5rem]:hidden lg:ml-4 lg:border-l lg:border-current/25 lg:pl-5">
               <Link
                 href={enlaceProfesionales.href}
                 aria-current={estaActivo(pathname, enlaceProfesionales.href) ? "page" : undefined}
@@ -153,7 +153,7 @@ export function Header() {
             <button
               ref={botonMenu}
               type="button"
-              className="flex w-[4.25rem] flex-col items-center justify-center gap-0.5 border-l border-linea bg-fondo text-tinta lg:hidden"
+              className="flex w-16 flex-col items-center justify-center gap-0.5 border-l border-linea bg-fondo text-tinta lg:hidden"
               aria-expanded={abierto}
               aria-controls={ID_MENU}
               onClick={() => setAbierto((v) => !v)}
