@@ -73,7 +73,7 @@ export function PlantsMap() {
             title: u.nombre,
             keyboard: true,
           }).addTo(m);
-          marcador.bindPopup(`<strong>${u.nombre}</strong><br>${u.ciudad}`);
+          marcador.bindPopup(`<strong>${u.nombre}</strong><br>${u.ciudad}`, { autoPanPaddingTopLeft: [64, 24], autoPanPaddingBottomRight: [24, 24] });
           marcador.on("click", () => setSeleccion(u.id));
           marcadoresActuales.set(u.id, marcador);
         }
@@ -109,14 +109,14 @@ export function PlantsMap() {
   const elegida = ubicaciones.find((u) => u.id === seleccion) ?? ubicaciones[0];
 
   return (
-    <div className="grid gap-x-14 gap-y-8 lg:grid-cols-[1fr_1.5fr] lg:grid-rows-[auto_1fr]">
+    <div className="grid gap-x-14 gap-y-8 md:grid-cols-[1fr_1.5fr] md:grid-rows-[auto_1fr]">
       {/* En pantallas chicas el mapa va primero y queda fijo mientras se recorre la lista. */}
-      <div className="sticky top-16 z-10 order-1 -mx-gutter bg-fondo px-gutter pb-3 pt-3 lg:static lg:col-start-2 lg:row-start-1 lg:mx-0 lg:p-0">
+      <div className="sticky top-16 z-10 order-1 -mx-gutter bg-fondo px-gutter pb-3 pt-3 md:static md:col-start-2 md:row-start-1 md:mx-0 md:p-0">
         <div
           ref={contenedor}
           role="region"
           aria-label="Mapa de plantas, centros de distribución y oficinas"
-          className="relative isolate z-0 h-56 overflow-hidden rounded-card border-2 border-linea bg-superficie sm:h-72 lg:h-[34rem]"
+          className="relative isolate z-0 h-56 overflow-hidden rounded-card border-2 border-linea bg-superficie sm:h-72 md:h-[30rem]"
         />
         <div aria-live="polite" className="mt-3 space-y-3 empty:mt-0">
           {estado === "cargando" ? <p className="text-tinta-suave">Cargando el mapa…</p> : null}
@@ -133,7 +133,7 @@ export function PlantsMap() {
         </div>
       </div>
 
-      <div className="order-2 lg:col-start-2 lg:row-start-2">
+      <div className="order-2 md:col-start-2 md:row-start-2">
         <article className="rounded-card border-2 border-baya-700 bg-fondo p-6" aria-labelledby="sede-elegida">
           <h3 id="sede-elegida" className="text-xl">
             {elegida.nombre}
@@ -149,7 +149,7 @@ export function PlantsMap() {
         </p>
       </div>
 
-      <div className="order-3 lg:col-start-1 lg:row-span-2 lg:row-start-1">
+      <div className="order-3 md:col-start-1 md:row-span-2 md:row-start-1">
         <h2 className="text-xl">Elegí una sede</h2>
         <p className="mt-2 text-tinta-suave">Al elegir una, el mapa se acerca a su ubicación.</p>
         <div className="mt-6 space-y-8">
