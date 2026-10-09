@@ -1,0 +1,19 @@
+# dependencias
+node_modules
+
+# build
+.next
+out
+
+# entorno
+.env*
+!.env.example
+
+# despliegue
+.vercel
+
+# varios
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+npm-debug.log*
