@@ -67,11 +67,11 @@ export function ApplicationForm({ vacanteInicial }: { vacanteInicial?: string })
       </Field>
 
       <Field id="email" etiqueta="Correo" requerido error={errores.email}>
-        {(a) => <input {...a} name="email" type="email" autoComplete="email" inputMode="email" className={campo.control} />}
+        {(a) => <input {...a} name="email" type="email" autoComplete="email" inputMode="email" spellCheck={false} className={campo.control} />}
       </Field>
 
       <Field id="telefono" etiqueta="Teléfono" error={errores.telefono} ayuda="Con código de área, por ejemplo 11 5555 0123.">
-        {(a) => <input {...a} name="telefono" type="tel" autoComplete="tel" inputMode="tel" className={campo.control} />}
+        {(a) => <input {...a} name="telefono" type="tel" autoComplete="tel" inputMode="tel" spellCheck={false} className={campo.control} />}
       </Field>
 
       <Field id="vacante" etiqueta="Vacante" requerido error={errores.vacante}>
@@ -88,7 +88,7 @@ export function ApplicationForm({ vacanteInicial }: { vacanteInicial?: string })
       </Field>
 
       <Field id="perfil" etiqueta="Enlace a tu perfil profesional" error={errores.perfil} ayuda="Por ejemplo, tu perfil en una red profesional.">
-        {(a) => <input {...a} name="perfil" type="url" inputMode="url" autoComplete="off" className={campo.control} />}
+        {(a) => <input {...a} name="perfil" type="url" inputMode="url" autoComplete="off" spellCheck={false} className={campo.control} />}
       </Field>
 
       <Field id="mensaje" etiqueta="¿Por qué te interesa?" requerido error={errores.mensaje} ayuda="Contanos en pocas líneas tu experiencia y lo que buscás.">

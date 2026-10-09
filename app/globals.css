@@ -7,7 +7,8 @@
   Paleta: baya (ciruela profunda, ancla de marca), ocre (acento sobre
   oscuro) y neutros con un toque de baya. Todo en OKLCH.
   Contrastes medidos contra --color-fondo:
-    tinta 15:1 · tinta-suave 9:1 · baya-700 9:1 · baya-600 6:1 (solo texto grande)
+    tinta 16,7:1 · tinta-suave 9:1 · baya-700 9,5:1 · botón blanco sobre baya-700 10:1
+  baya-600 (6:1 aprox.) no se usa para texto.
 */
 @theme {
   /* Puntos de corte propios */
@@ -19,8 +20,8 @@
 
   /* Neutros */
   --color-fondo: oklch(0.985 0.004 355);
-  --color-superficie: oklch(0.957 0.012 355);
-  --color-superficie-fuerte: oklch(0.92 0.02 355);
+  --color-superficie: oklch(0.958 0.008 355);
+  --color-superficie-fuerte: oklch(0.915 0.014 355);
   --color-tinta: oklch(0.22 0.025 350);
   --color-tinta-suave: oklch(0.4 0.03 350);
   --color-linea: oklch(0.87 0.015 355);
@@ -130,6 +131,20 @@
     outline: 3px solid var(--foco);
     outline-offset: 3px;
     border-radius: 2px;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  label,
+  summary {
+    touch-action: manipulation;
+  }
+
+  html {
+    -webkit-tap-highlight-color: oklch(0.4 0.14 355 / 0.15);
   }
 
   ::selection {

@@ -46,7 +46,7 @@ export function CookieNotice() {
   return (
     <section
       aria-labelledby="cookies-titulo"
-      className="fixed inset-x-3 bottom-3 z-(--z-aviso) mx-auto max-w-3xl rounded-card border-2 border-baya-900 bg-fondo p-5 shadow-panel sm:inset-x-6 sm:bottom-6"
+      className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-(--z-aviso) mx-auto max-w-3xl rounded-card border-2 border-baya-900 bg-fondo p-5 shadow-panel sm:inset-x-6 sm:bottom-6"
     >
       <h2 id="cookies-titulo" className="font-display text-lg font-semibold">
         Cookies en este sitio

@@ -6,6 +6,8 @@ export type AtributosCampo = {
   "aria-invalid": boolean | undefined;
   "aria-describedby": string | undefined;
   "aria-required": boolean | undefined;
+  "data-1p-ignore": boolean;
+  "data-lpignore": "true";
 };
 
 type Props = {
@@ -60,6 +62,8 @@ export function Field({ id, etiqueta, ayuda, error, requerido, children }: Props
         "aria-invalid": error ? true : undefined,
         "aria-describedby": describedby,
         "aria-required": requerido ? true : undefined,
+        "data-1p-ignore": true,
+        "data-lpignore": "true",
       })}
       {error && idError ? <MensajeError id={idError}>{error}</MensajeError> : null}
     </div>
@@ -94,7 +98,6 @@ export function GrupoRadios({ nombre, leyenda, ayuda, error, opciones }: GrupoPr
               type="radio"
               name={nombre}
               value={o.valor}
-              aria-invalid={error ? true : undefined}
               className="size-6 shrink-0 accent-baya-700"
             />
             {o.etiqueta}

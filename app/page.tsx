@@ -54,7 +54,7 @@ export default function Inicio() {
           </h2>
           <ul className="divide-y divide-linea border-y border-linea">
             {valor.map((v) => (
-              <li key={v.titulo} className="grid gap-3 py-8 sm:grid-cols-[10rem_1fr] sm:gap-8">
+              <li key={v.titulo} className="grid gap-3 py-8 sm:grid-cols-[13rem_1fr] sm:gap-10">
                 <h3 className="text-xl">{v.titulo}</h3>
                 <div>
                   <p>{v.texto}</p>
@@ -120,7 +120,7 @@ export default function Inicio() {
           {cifras.map((c) => (
             <div key={c.etiqueta} className="flex flex-col border-t-2 border-ocre-300 pt-5">
               <dt className="order-2 mt-2 text-base">{c.etiqueta}</dt>
-              <dd className="order-1 font-display text-4xl font-semibold">{c.valor}</dd>
+              <dd className="order-1 font-display text-4xl font-semibold tabular-nums">{c.valor}</dd>
             </div>
           ))}
         </dl>

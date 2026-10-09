@@ -4,6 +4,12 @@ import { Casilla, Field, GrupoRadios } from "./Field";
 import { reEmail, texto, useFormulario, type Validador } from "./useFormulario";
 import { aviso, boton, campo } from "@/lib/ui";
 
+function hoyLocal(): string {
+  const d = new Date();
+  const dos = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${dos(d.getMonth() + 1)}-${dos(d.getDate())}`;
+}
+
 const validar: Validador = (d) => {
   const e: Record<string, string> = {};
   if (!texto(d, "quien")) e.quien = "Elegí quién está reportando.";
@@ -12,7 +18,7 @@ const validar: Validador = (d) => {
   if (!desc) e.descripcion = "Contanos qué pasó.";
   else if (desc.length < 20) e.descripcion = "Agregá un poco más de detalle: al menos 20 caracteres.";
   const fecha = texto(d, "fecha");
-  if (fecha && fecha > new Date().toISOString().slice(0, 10)) e.fecha = "La fecha no puede ser posterior a hoy.";
+  if (fecha && fecha > hoyLocal()) e.fecha = "La fecha no puede ser posterior a hoy.";
   if (!texto(d, "atencion")) e.atencion = "Elegí una opción.";
   const email = texto(d, "email");
   if (email && !reEmail.test(email)) e.email = "Revisá el correo: tiene que verse como nombre@dominio.com.";
@@ -23,7 +29,7 @@ const validar: Validador = (d) => {
 export function AdverseEventForm() {
   const { formulario, errores, enviado, alEnviar, reiniciar } = useFormulario(validar);
   const claves = Object.keys(errores);
-  const hoy = new Date().toISOString().slice(0, 10);
+  const hoy = hoyLocal();
 
   if (enviado) {
     return (
@@ -80,7 +86,7 @@ export function AdverseEventForm() {
       </Field>
 
       <Field id="fecha" etiqueta="Fecha aproximada" error={errores.fecha} ayuda="Si no la sabés con exactitud, elegí una fecha cercana.">
-        {(a) => <input {...a} name="fecha" type="date" max={hoy} className={`${campo.control} sm:max-w-xs`} />}
+        {(a) => <input {...a} name="fecha" type="date" max={hoy} suppressHydrationWarning className={`${campo.control} sm:max-w-xs`} />}
       </Field>
 
       <GrupoRadios
@@ -100,7 +106,7 @@ export function AdverseEventForm() {
         error={errores.email}
         ayuda="Solo si querés que te contactemos para pedirte más datos."
       >
-        {(a) => <input {...a} name="email" type="email" autoComplete="email" inputMode="email" className={campo.control} />}
+        {(a) => <input {...a} name="email" type="email" autoComplete="email" inputMode="email" spellCheck={false} className={campo.control} />}
       </Field>
 
       <Casilla nombre="consentimiento" error={errores.consentimiento}>

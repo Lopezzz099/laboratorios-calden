@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { areas, getArea, type AreaSlug } from "@/lib/areas";
 import type { Forma, Producto } from "@/lib/products";
 import { boton, campo, etiqueta } from "@/lib/ui";
@@ -25,12 +25,28 @@ export function ProductCatalog({ productos, formas }: Props) {
     [productos],
   );
 
-  const [busqueda, setBusqueda] = useState("");
+  const [busqueda, setBusqueda] = useState(() => params.get("q") ?? "");
   const [area, setArea] = useState<AreaSlug | "">(() => {
     const inicial = params.get("area");
     return areasConProductos.find((a) => a.slug === inicial)?.slug ?? "";
   });
-  const [forma, setForma] = useState<Forma | "">("");
+  const [forma, setForma] = useState<Forma | "">(() => {
+    const inicial = params.get("forma");
+    return formas.find((f) => f === inicial) ?? "";
+  });
+
+  // La URL refleja los filtros, así se pueden compartir y volver con el botón Atrás.
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const sincronizar = (clave: string, valor: string) => {
+      if (valor) url.searchParams.set(clave, valor);
+      else url.searchParams.delete(clave);
+    };
+    sincronizar("q", busqueda.trim());
+    sincronizar("area", area);
+    sincronizar("forma", forma);
+    window.history.replaceState(window.history.state, "", url);
+  }, [busqueda, area, forma]);
 
   const filtrados = useMemo(() => {
     const q = normalizar(busqueda);
@@ -67,7 +83,7 @@ export function ProductCatalog({ productos, formas }: Props) {
             type="search"
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
-            placeholder="Por ejemplo, Aldivia"
+            placeholder="Por ejemplo, Aldivia…"
             autoComplete="off"
             className={campo.control}
           />

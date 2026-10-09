@@ -67,7 +67,7 @@ export default function Nosotros() {
         <ol className="mt-10 border-t border-linea">
           {hitos.map((h) => (
             <li key={h.anio} className="grid gap-2 border-b border-linea py-7 sm:grid-cols-[8rem_1fr] sm:gap-8 lg:grid-cols-[10rem_16rem_1fr]">
-              <p className="font-display text-3xl font-semibold text-baya-700">{h.anio}</p>
+              <p className="font-display text-3xl font-semibold tabular-nums text-baya-700">{h.anio}</p>
               <h3 className="text-xl">{h.titulo}</h3>
               <p className="max-w-xl sm:col-start-2 lg:col-start-3">{h.texto}</p>
             </li>

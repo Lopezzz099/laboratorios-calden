@@ -184,7 +184,7 @@ export function Header() {
         aria-label="Menú de navegación"
         inert={!abierto}
         className={[
-          "fixed bottom-0 right-0 top-0 z-(--z-menu) flex w-[min(24rem,92vw)] flex-col overflow-y-auto bg-fondo text-tinta shadow-panel transition-transform duration-300 ease-salida lg:hidden",
+          "fixed bottom-0 right-0 top-0 z-(--z-menu) flex w-[min(24rem,92vw)] flex-col overflow-y-auto overscroll-contain bg-fondo text-tinta shadow-panel transition-transform duration-300 ease-salida lg:hidden",
           abierto ? "translate-x-0" : "translate-x-full",
         ].join(" ")}
       >
