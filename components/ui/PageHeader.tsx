@@ -17,17 +17,17 @@ export function PageHeader({ titulo, bajada, migas, children }: Props) {
     <div className="border-b border-linea bg-superficie pb-10 pt-24 lg:pb-12 lg:pt-32">
       <div className={contenedor}>
         {migas && migas.length > 0 ? (
-          <nav aria-label="Ruta de navegación" className="mb-6 text-sm">
+          <nav aria-label="Ruta de navegación" className="mb-3 text-sm">
             <ol className="flex flex-wrap items-center gap-x-2">
               <li>
-                <Link href="/" className={enlace}>
+                <Link href="/" className={`${enlace} inline-flex min-h-11 items-center`}>
                   Inicio
                 </Link>
               </li>
               {migas.map((m) => (
                 <li key={m.href} className="flex items-center gap-x-2">
                   <span aria-hidden="true">/</span>
-                  <Link href={m.href} className={enlace}>
+                  <Link href={m.href} className={`${enlace} inline-flex min-h-11 items-center`}>
                     {m.etiqueta}
                   </Link>
                 </li>

@@ -49,9 +49,14 @@ export default function Inicio() {
 
       <Section titulo="valor-titulo">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-24">
-          <h2 id="valor-titulo" className="text-3xl">
-            Lo que hacemos, sin vueltas
-          </h2>
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <h2 id="valor-titulo" className="text-3xl">
+              Lo que hacemos, sin vueltas
+            </h2>
+            <p className="mt-5 max-w-sm text-tinta-suave">
+              Investigamos, fabricamos y escuchamos. Cada línea te lleva al detalle.
+            </p>
+          </div>
           <ul className="divide-y divide-linea border-y border-linea">
             {valor.map((v) => (
               <li key={v.titulo} className="grid gap-3 py-8 sm:grid-cols-[13rem_1fr] sm:gap-10">

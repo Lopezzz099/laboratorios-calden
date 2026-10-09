@@ -9,6 +9,11 @@ import { aviso } from "@/lib/ui";
 type Estado = "cargando" | "listo" | "error";
 
 const tipos: TipoUbicacion[] = ["Planta de producción", "Centro de distribución", "Oficina"];
+const TITULOS_GRUPO: Record<TipoUbicacion, string> = {
+  "Planta de producción": "Planta de producción",
+  "Centro de distribución": "Centros de distribución",
+  Oficina: "Oficinas",
+};
 const letra: Record<TipoUbicacion, string> = {
   "Planta de producción": "P",
   "Centro de distribución": "D",
@@ -104,8 +109,47 @@ export function PlantsMap() {
   const elegida = ubicaciones.find((u) => u.id === seleccion) ?? ubicaciones[0];
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-14">
-      <div>
+    <div className="grid gap-x-14 gap-y-8 lg:grid-cols-[1fr_1.5fr] lg:grid-rows-[auto_1fr]">
+      {/* En pantallas chicas el mapa va primero y queda fijo mientras se recorre la lista. */}
+      <div className="sticky top-16 z-10 order-1 -mx-gutter bg-fondo px-gutter pb-3 pt-3 lg:static lg:col-start-2 lg:row-start-1 lg:mx-0 lg:p-0">
+        <div
+          ref={contenedor}
+          role="region"
+          aria-label="Mapa de plantas, centros de distribución y oficinas"
+          className="relative isolate z-0 h-56 overflow-hidden rounded-card border-2 border-linea bg-superficie sm:h-72 lg:h-[34rem]"
+        />
+        <div aria-live="polite" className="mt-3 space-y-3 empty:mt-0">
+          {estado === "cargando" ? <p className="text-tinta-suave">Cargando el mapa…</p> : null}
+          {estado === "error" ? (
+            <p className={aviso.error}>
+              No pudimos cargar el mapa. Podés seguir usando la lista: abajo están los datos de cada sede.
+            </p>
+          ) : null}
+          {mosaicosFallan ? (
+            <p className={aviso.error}>
+              Algunas partes del mapa no se cargaron. Puede ser un problema de conexión. La lista sigue funcionando.
+            </p>
+          ) : null}
+        </div>
+      </div>
+
+      <div className="order-2 lg:col-start-2 lg:row-start-2">
+        <article className="rounded-card border-2 border-baya-700 bg-fondo p-6" aria-labelledby="sede-elegida">
+          <h3 id="sede-elegida" className="text-xl">
+            {elegida.nombre}
+          </h3>
+          <p className="mt-1 font-semibold text-baya-700">{elegida.tipo}</p>
+          <p className="mt-3">{elegida.descripcion}</p>
+          <p className="mt-3 text-tinta-suave">
+            {elegida.ciudad}. {elegida.direccion}.
+          </p>
+        </article>
+        <p className="mt-4 text-sm text-tinta-suave">
+          Ubicaciones de ejemplo, aproximadas a cada ciudad. El mapa se carga desde OpenStreetMap solo en esta página.
+        </p>
+      </div>
+
+      <div className="order-3 lg:col-start-1 lg:row-span-2 lg:row-start-1">
         <h2 className="text-xl">Elegí una sede</h2>
         <p className="mt-2 text-tinta-suave">Al elegir una, el mapa se acerca a su ubicación.</p>
         <div className="mt-6 space-y-8">
@@ -113,9 +157,7 @@ export function PlantsMap() {
             const items = ubicaciones.filter((u) => u.tipo === tipo);
             return (
               <div key={tipo}>
-                <h3 className="font-display text-lg font-semibold">
-                  {tipo === "Oficina" ? "Oficinas" : tipo === "Planta de producción" ? "Planta de producción" : "Centros de distribución"}
-                </h3>
+                <h3 className="font-display text-lg font-semibold">{TITULOS_GRUPO[tipo]}</h3>
                 <ul className="mt-2 border-t border-linea">
                   {items.map((u) => {
                     const activo = u.id === seleccion;
@@ -143,42 +185,6 @@ export function PlantsMap() {
             );
           })}
         </div>
-      </div>
-
-      <div>
-        <div
-          ref={contenedor}
-          role="region"
-          aria-label="Mapa de plantas, centros de distribución y oficinas"
-          className="relative isolate z-0 h-[24rem] overflow-hidden rounded-card border-2 border-linea bg-superficie lg:h-[34rem]"
-        />
-        <div aria-live="polite" className="mt-4 space-y-3">
-          {estado === "cargando" ? <p className="text-tinta-suave">Cargando el mapa…</p> : null}
-          {estado === "error" ? (
-            <p className={aviso.error}>
-              No pudimos cargar el mapa. Podés seguir usando la lista: abajo están los datos de cada sede.
-            </p>
-          ) : null}
-          {mosaicosFallan ? (
-            <p className={aviso.error}>
-              Algunas partes del mapa no se cargaron. Puede ser un problema de conexión. La lista sigue funcionando.
-            </p>
-          ) : null}
-        </div>
-
-        <article className="mt-6 rounded-card border-2 border-baya-700 bg-fondo p-6" aria-labelledby="sede-elegida">
-          <h3 id="sede-elegida" className="text-xl">
-            {elegida.nombre}
-          </h3>
-          <p className="mt-1 font-semibold text-baya-700">{elegida.tipo}</p>
-          <p className="mt-3">{elegida.descripcion}</p>
-          <p className="mt-3 text-tinta-suave">
-            {elegida.ciudad}. {elegida.direccion}.
-          </p>
-        </article>
-        <p className="mt-4 text-sm text-tinta-suave">
-          Ubicaciones de ejemplo, aproximadas a cada ciudad. El mapa se carga desde OpenStreetMap solo en esta página.
-        </p>
       </div>
     </div>
   );
