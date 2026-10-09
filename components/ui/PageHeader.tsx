@@ -14,7 +14,7 @@ type Props = {
 /** Cabecera de las páginas interiores. El único h1 de cada página. */
 export function PageHeader({ titulo, bajada, migas, children }: Props) {
   return (
-    <div className="border-b border-linea bg-superficie pb-12 pt-28 lg:pb-16 lg:pt-40">
+    <div className="border-b border-linea bg-superficie pb-10 pt-24 lg:pb-12 lg:pt-32">
       <div className={contenedor}>
         {migas && migas.length > 0 ? (
           <nav aria-label="Ruta de navegación" className="mb-6 text-sm">

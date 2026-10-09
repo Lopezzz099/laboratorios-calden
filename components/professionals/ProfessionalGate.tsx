@@ -21,7 +21,7 @@ export function ProfessionalGate({ children }: { children: ReactNode }) {
   if (!confirmado) {
     return (
       <Section>
-        <div className="mx-auto max-w-3xl">
+        <div className="max-w-3xl">
           <h2 className="text-2xl">Antes de entrar</h2>
           <div className="prosa mt-6">
             <p>

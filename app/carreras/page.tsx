@@ -56,7 +56,7 @@ export default function Carreras() {
       </Section>
 
       <Section tono="suave" id="postularme" titulo="postulacion-titulo">
-        <div className="mx-auto max-w-2xl">
+        <div className="max-w-2xl">
           <h2 id="postulacion-titulo" className="text-2xl">
             Postulate
           </h2>

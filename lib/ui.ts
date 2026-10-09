@@ -67,7 +67,8 @@ export const campo = {
 
 /** Cajas de aviso */
 export const aviso = {
-  info: "rounded-card border-2 border-baya-200 bg-baya-100 px-5 py-4 text-tinta",
+  info: "rounded-card border border-borde-campo bg-fondo px-5 py-4 text-tinta",
+  destacado: "rounded-card border-2 border-baya-700 bg-fondo px-5 py-4 text-tinta",
   error: "rounded-card border-2 border-error bg-error-fondo px-5 py-4 text-tinta",
   exito: "rounded-card border-2 border-exito bg-exito-fondo px-5 py-4 text-tinta",
 } as const;

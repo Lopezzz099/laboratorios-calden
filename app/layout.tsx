@@ -42,7 +42,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-AR" className={`${atkinson.variable} ${literata.variable}`}>
+    <html lang="es-AR" data-scroll-behavior="smooth" className={`${atkinson.variable} ${literata.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#contenido"

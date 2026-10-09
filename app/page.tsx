@@ -154,26 +154,26 @@ export default function Inicio() {
           Accesos rápidos
         </h2>
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-card border-2 border-baya-700 bg-fondo p-8 lg:p-12">
+          <div className="flex flex-col rounded-card border-2 border-baya-700 bg-fondo p-6 lg:p-9">
             <h3 className="text-xl">¿Usaste un producto y notaste algo?</h3>
             <p className="mt-4 text-tinta-suave">
               Contanos qué pasó. El formulario tarda unos minutos y no hace falta tener todos los datos. En este sitio
               de demostración no se envía nada.
             </p>
-            <p className="mt-8">
-              <Link href="/farmacovigilancia" className={boton("primario", "lg")}>
+            <p className="mt-auto pt-8">
+              <Link href="/farmacovigilancia" className={boton("primario")}>
                 Reportar un efecto adverso
               </Link>
             </p>
           </div>
-          <div className="rounded-card border-2 border-baya-700 bg-fondo p-8 lg:p-12">
+          <div className="flex flex-col rounded-card border-2 border-baya-700 bg-fondo p-6 lg:p-9">
             <h3 className="text-xl">¿Sos profesional de la salud?</h3>
             <p className="mt-4 text-tinta-suave">
               El portafolio completo y el material científico están en una zona aparte. Pedimos una confirmación simple
               antes de mostrarlos.
             </p>
-            <p className="mt-8">
-              <Link href="/profesionales" className={boton("secundario", "lg")}>
+            <p className="mt-auto pt-8">
+              <Link href="/profesionales" className={boton("secundario")}>
                 Ir a la zona de profesionales
               </Link>
             </p>

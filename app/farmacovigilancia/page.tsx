@@ -17,7 +17,7 @@ export default function Farmacovigilancia() {
         titulo="Reportar un efecto adverso"
         bajada="Si usaste un producto y te pasó algo que no esperabas, contanoslo. Un reporte tuyo puede ayudar a otras personas."
       >
-        <div role="note" className={`${aviso.info} max-w-3xl`}>
+        <div role="note" className={`${aviso.destacado} max-w-3xl`}>
           <p>
             <strong className="font-semibold">Si es una urgencia, llamá al 107 o al 911.</strong> Este formulario no
             reemplaza la atención médica.
