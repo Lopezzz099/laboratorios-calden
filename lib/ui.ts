@@ -31,7 +31,7 @@ const botonVariantes = {
 } as const;
 
 const botonTamanos = {
-  compacto: "min-h-11 px-3 py-1.5 text-sm lg:px-5 lg:text-base",
+  compacto: "min-h-11 whitespace-nowrap px-3 py-1.5 text-sm leading-none lg:px-5 lg:text-[0.9375rem]",
   md: "min-h-11 px-5 py-2.5 text-base",
   lg: "min-h-14 px-7 py-3 text-base sm:text-lg",
 } as const;

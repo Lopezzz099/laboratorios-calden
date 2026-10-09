@@ -18,7 +18,7 @@ function IconoMenu({ abierto }: { abierto: boolean }) {
 }
 
 const claseEnlaceEscritorio =
-  "relative flex min-h-11 items-center px-3 text-base font-medium no-underline after:absolute after:inset-x-3 after:bottom-1.5 after:h-[3px] after:rounded-full after:bg-current after:transition-opacity";
+  "relative flex min-h-11 items-center whitespace-nowrap px-2.5 text-[1rem] font-medium leading-none no-underline after:absolute after:inset-x-2.5 after:bottom-1.5 after:h-[3px] after:rounded-full after:bg-current after:transition-opacity";
 
 export function Header() {
   const pathname = usePathname();
@@ -102,13 +102,13 @@ export function Header() {
           sobreHero ? "lg:border-fondo/0 lg:bg-baya-900/0 lg:text-fondo" : "",
         ].join(" ")}
       >
-        <div className="mx-auto flex h-16 max-w-[84rem] items-stretch justify-between gap-3 pl-gutter lg:h-20 lg:pr-gutter">
+        <div className="mx-auto flex h-16 max-w-[84rem] items-stretch justify-between gap-3 pl-gutter lg:h-[4.5rem] lg:pr-gutter">
           <Link href="/" className="flex items-center rounded-sm" aria-label={`${site.nombre}, ir al inicio`}>
             <Logo />
           </Link>
 
           <nav aria-label="Principal" className="hidden lg:flex lg:items-center">
-            <ul className="flex items-center gap-1">
+            <ul className="flex items-center gap-0.5">
               {navPrincipal.map((item) => {
                 const activo = estaActivo(pathname, item.href);
                 return (
@@ -140,7 +140,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-stretch gap-2 lg:gap-3">
-            <div className="flex items-center max-[22.5rem]:hidden lg:ml-4 lg:border-l lg:border-current/25 lg:pl-5">
+            <div className="flex items-center max-[22.5rem]:hidden lg:ml-3 lg:border-l lg:border-current/25 lg:pl-4">
               <Link
                 href={enlaceProfesionales.href}
                 aria-current={estaActivo(pathname, enlaceProfesionales.href) ? "page" : undefined}

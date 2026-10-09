@@ -20,9 +20,9 @@ export function Logo({ className }: Props) {
   return (
     <span className={`inline-flex items-center gap-2 sm:gap-2.5 ${className ?? ""}`}>
       <LogoMarca className="size-8 shrink-0 sm:size-9" />
-      <span className="flex flex-col leading-none">
-        <span className="font-display text-xl font-semibold tracking-tight">Caldén</span>
-        <span className="mt-1 text-sm font-medium">Laboratorios</span>
+      <span className="flex flex-col">
+        <span className="font-display text-[1.375rem] font-semibold leading-[1.05] tracking-tight">Caldén</span>
+        <span className="mt-[3px] text-[0.8125rem] font-medium leading-none tracking-wide">Laboratorios</span>
       </span>
     </span>
   );
