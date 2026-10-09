@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 
 type Props = { src: string; poster: string };
 
@@ -11,20 +11,23 @@ type ConexionConAhorro = { connection?: { saveData?: boolean } };
  * solo se monta si la persona no pidió reducir el movimiento ni activó el
  * ahorro de datos.
  */
-export function HeroVideo({ src, poster }: Props) {
-  const [activo, setActivo] = useState(false);
-  const video = useRef<HTMLVideoElement>(null);
+const CONSULTA = "(prefers-reduced-motion: reduce)";
 
-  useEffect(() => {
-    const reducir = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const ahorro = (navigator as Navigator & ConexionConAhorro).connection?.saveData === true;
-    setActivo(!reducir.matches && !ahorro);
-    const alCambiar = () => {
-      if (reducir.matches) setActivo(false);
-    };
-    reducir.addEventListener("change", alCambiar);
-    return () => reducir.removeEventListener("change", alCambiar);
-  }, []);
+function suscribir(avisar: () => void) {
+  const mq = window.matchMedia(CONSULTA);
+  mq.addEventListener("change", avisar);
+  return () => mq.removeEventListener("change", avisar);
+}
+
+function puedeReproducir(): boolean {
+  const ahorro = (navigator as Navigator & ConexionConAhorro).connection?.saveData === true;
+  return !window.matchMedia(CONSULTA).matches && !ahorro;
+}
+
+export function HeroVideo({ src, poster }: Props) {
+  // En el servidor siempre es false: el HTML inicial solo trae la foto.
+  const activo = useSyncExternalStore(suscribir, puedeReproducir, () => false);
+  const video = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const el = video.current;
@@ -32,7 +35,14 @@ export function HeroVideo({ src, poster }: Props) {
     // React no refleja `muted` como atributo en el HTML del servidor: se asigna como propiedad.
     el.muted = true;
     el.defaultMuted = true;
-    el.play().catch(() => setActivo(false));
+    // Si el navegador no deja reproducir (pestaña en segundo plano, por ejemplo),
+    // queda la foto de respaldo y se reintenta cuando la pestaña se vuelve visible.
+    const intentar = () => {
+      if (!document.hidden && el.paused) el.play().catch(() => undefined);
+    };
+    intentar();
+    document.addEventListener("visibilitychange", intentar);
+    return () => document.removeEventListener("visibilitychange", intentar);
   }, [activo]);
 
   if (!activo) return null;

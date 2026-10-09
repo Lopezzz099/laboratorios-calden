@@ -19,7 +19,7 @@ export function Hero() {
         className="object-cover object-[50%_82%]"
       />
       <HeroVideo src="/video/hero.mp4" poster="/images/hero.jpg" />
-      <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-baya-900 via-baya-900/80 to-baya-900/60" />
+      <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-baya-900/95 via-baya-900/75 to-baya-900/55" />
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-48 bg-linear-to-b from-baya-900/90 to-baya-900/0" />
 
       <div className={`${contenedor} relative pb-16 pt-40 sm:pb-24`}>
