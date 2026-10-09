@@ -77,7 +77,7 @@ catálogo con filtros, confirmación de profesionales, formularios, mapa y aviso
 ## Accesibilidad
 
 - Tipografías: Atkinson Hyperlegible Next (cuerpo, pensada para baja visión) y Literata (títulos).
-- Cuerpo de 18 a 20 px. Contraste medido de los pares de texto de la paleta: de 7,8:1 a 16,7:1 (AAA en cuerpo).
+- Cuerpo de 17 px en celular y 18 px en pantallas grandes. Contraste medido de los pares de texto de la paleta: de 7,8:1 a 16,7:1 (AAA en cuerpo).
 - Foco visible, objetivos táctiles de 44 px, enlace para saltar al contenido, `prefers-reduced-motion` y ahorro de
   datos respetados (el video del hero no se reproduce).
 - Formularios con etiquetas visibles, errores junto al campo y foco al primer error.
