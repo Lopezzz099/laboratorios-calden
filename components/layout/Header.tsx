@@ -18,7 +18,7 @@ function IconoMenu({ abierto }: { abierto: boolean }) {
 }
 
 const claseEnlaceEscritorio =
-  "relative flex min-h-11 items-center whitespace-nowrap px-2.5 text-[1rem] font-medium leading-none no-underline after:absolute after:inset-x-2.5 after:bottom-1.5 after:h-[3px] after:rounded-full after:bg-current after:transition-opacity";
+  "relative flex min-h-11 items-center whitespace-nowrap px-2 text-[0.9375rem] xl:px-2.5 xl:text-[1rem] font-medium leading-none no-underline after:absolute after:inset-x-2 xl:after:inset-x-2.5 after:bottom-1.5 after:h-[3px] after:rounded-full after:bg-current after:transition-opacity";
 
 export function Header() {
   const pathname = usePathname();
@@ -56,7 +56,7 @@ export function Header() {
     }
     estabaAbierto.current = true;
     botonCerrar.current?.focus();
-    document.documentElement.style.overflow = "hidden";
+    document.documentElement.dataset.menuAbierto = "";
 
     const alTeclear = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -76,17 +76,20 @@ export function Header() {
         primero.focus();
       }
     };
-    const mq = window.matchMedia("(min-width: 70rem)");
+    const mq = window.matchMedia("(min-width: 64rem)");
     const alCambiarAncho = () => {
       if (mq.matches) cerrar();
     };
 
     document.addEventListener("keydown", alTeclear);
     mq.addEventListener("change", alCambiarAncho);
+    // Respaldo: al rotar una tablet no todos los navegadores avisan el cambio de la media query a tiempo.
+    window.addEventListener("resize", alCambiarAncho);
     return () => {
-      document.documentElement.style.overflow = "";
+      delete document.documentElement.dataset.menuAbierto;
       document.removeEventListener("keydown", alTeclear);
       mq.removeEventListener("change", alCambiarAncho);
+      window.removeEventListener("resize", alCambiarAncho);
     };
   }, [abierto, cerrar]);
 
@@ -99,15 +102,15 @@ export function Header() {
         className={[
           "fixed inset-x-0 top-0 z-(--z-header) border-b transition-colors duration-300",
           "border-linea bg-fondo text-tinta",
-          sobreHero ? "lg:border-fondo/0 lg:bg-baya-900/0 lg:text-fondo" : "",
+          sobreHero ? "nav:border-fondo/0 nav:bg-baya-900/0 nav:text-fondo" : "",
         ].join(" ")}
       >
-        <div className="mx-auto flex h-16 max-w-[84rem] items-stretch justify-between gap-3 pl-gutter lg:h-[4.5rem] lg:pr-gutter">
+        <div className="mx-auto flex h-16 max-w-[84rem] items-stretch justify-between gap-3 pl-gutter nav:h-[4.5rem] nav:pr-gutter">
           <Link href="/" className="flex items-center rounded-sm" aria-label={`${site.nombre}, ir al inicio`}>
             <Logo />
           </Link>
 
-          <nav aria-label="Principal" className="hidden lg:flex lg:items-center">
+          <nav aria-label="Principal" className="hidden nav:flex nav:items-center">
             <ul className="flex items-center gap-0.5">
               {navPrincipal.map((item) => {
                 const activo = estaActivo(pathname, item.href);
@@ -139,21 +142,21 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-stretch gap-2 lg:gap-3">
-            <div className="flex items-center max-[22.5rem]:hidden lg:ml-3 lg:border-l lg:border-current/25 lg:pl-4">
+          <div className="flex items-stretch gap-2 nav:gap-3">
+            <div className="flex items-center max-[22.5rem]:hidden nav:ml-3 nav:border-l nav:border-current/25 nav:pl-4">
               <Link
                 href={enlaceProfesionales.href}
                 aria-current={estaActivo(pathname, enlaceProfesionales.href) ? "page" : undefined}
-                className={boton("primario", "compacto", sobreHero ? "lg:bg-fondo lg:border-fondo lg:text-baya-900 lg:hover:bg-ocre-200 lg:hover:border-ocre-200" : "")}
+                className={boton("primario", "compacto", sobreHero ? "nav:bg-fondo nav:border-fondo nav:text-baya-900 nav:hover:bg-ocre-200 nav:hover:border-ocre-200" : "")}
               >
-                <span className="lg:hidden">Profesionales</span>
-                <span className="hidden lg:inline">{enlaceProfesionales.etiqueta}</span>
+                <span className="nav:hidden">Profesionales</span>
+                <span className="hidden nav:inline">{enlaceProfesionales.etiqueta}</span>
               </Link>
             </div>
             <button
               ref={botonMenu}
               type="button"
-              className="flex w-16 flex-col items-center justify-center gap-0.5 border-l border-linea bg-fondo text-tinta lg:hidden"
+              className="flex w-16 flex-col items-center justify-center gap-0.5 border-l border-linea bg-fondo text-tinta nav:hidden"
               aria-expanded={abierto}
               aria-controls={ID_MENU}
               onClick={() => setAbierto((v) => !v)}
@@ -170,7 +173,7 @@ export function Header() {
         aria-hidden="true"
         onClick={cerrar}
         className={[
-          "fixed inset-0 z-(--z-menu-fondo) bg-tinta/70 transition-opacity duration-300 lg:hidden",
+          "fixed inset-0 z-(--z-menu-fondo) bg-tinta/70 transition-opacity duration-300 nav:hidden",
           abierto ? "opacity-100" : "pointer-events-none opacity-0",
         ].join(" ")}
       />
@@ -184,7 +187,7 @@ export function Header() {
         aria-label="Menú de navegación"
         inert={!abierto}
         className={[
-          "fixed bottom-0 right-0 top-0 z-(--z-menu) flex w-[min(24rem,92vw)] flex-col overflow-y-auto overscroll-contain bg-fondo text-tinta shadow-panel transition-transform duration-300 ease-salida lg:hidden",
+          "fixed bottom-0 right-0 top-0 z-(--z-menu) flex w-[min(24rem,92vw)] flex-col overflow-y-auto overscroll-contain bg-fondo text-tinta shadow-panel transition-transform duration-300 ease-salida nav:hidden",
           abierto ? "translate-x-0" : "translate-x-full",
         ].join(" ")}
       >

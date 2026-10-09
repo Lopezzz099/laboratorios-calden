@@ -15,6 +15,7 @@
   --breakpoint-*: initial;
   --breakpoint-sm: 34rem;
   --breakpoint-md: 52rem;
+  --breakpoint-nav: 64rem; /* solo para el header: la navegación completa entra desde tablet horizontal */
   --breakpoint-lg: 70rem;
   --breakpoint-xl: 88rem;
 
@@ -91,6 +92,13 @@
   }
 
   /* Superficies oscuras: el anillo de foco pasa a ocre */
+  /* Menú móvil abierto: bloquea el scroll solo mientras el menú es visible (menos de 64 rem). */
+  @media (max-width: 63.999rem) {
+    html[data-menu-abierto] {
+      overflow: hidden;
+    }
+  }
+
   [data-tono="oscuro"] {
     --foco: var(--color-ocre-300);
   }
